@@ -4,6 +4,6 @@
   }
 
   angular
-    .module("blocJams")
-    .controller("CollectionCtrl", CollectionCtrl)
+    .module('blocJams')
+    .controller('CollectionCtrl', CollectionCtrl)
 })();
