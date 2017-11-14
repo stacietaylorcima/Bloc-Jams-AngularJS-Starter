@@ -17,15 +17,15 @@
      }
 
      currentBuzzObject = new buzz.sound(song.audioUrl, {
-        formats: ['mp3'],
-        preload: true
-      });
+       formats: ['mp3'],
+       preload: true
+   });
 
       currentSong = song;
 
       currentBuzzObject.play();
     };
-
+}
     return SongPlayer;
   }
 
