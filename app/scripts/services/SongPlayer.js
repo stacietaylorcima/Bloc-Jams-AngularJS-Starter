@@ -17,19 +17,33 @@
      }
 
      currentBuzzObject = new buzz.sound(song.audioUrl, {
+<<<<<<< HEAD
        formats: ['mp3'],
        preload: true
    });
+=======
+        formats: ['mp3'],
+        preload: true
+      });
+>>>>>>> 82514a40cff586867a241e34f32fa88de68c71d2
 
       currentSong = song;
 
       currentBuzzObject.play();
     };
+<<<<<<< HEAD
 }
+=======
+
+>>>>>>> 82514a40cff586867a241e34f32fa88de68c71d2
     return SongPlayer;
   }
 
   angular
   .module('blocJams')
   .factory('SongPlayer', SongPlayer);
+<<<<<<< HEAD
 })();
+=======
+}();
+>>>>>>> 82514a40cff586867a241e34f32fa88de68c71d2
