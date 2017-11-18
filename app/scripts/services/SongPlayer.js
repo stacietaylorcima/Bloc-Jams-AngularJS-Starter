@@ -22,8 +22,7 @@
 		*/
     var setSong = function(song) {
 			if (currentBuzzObject) {
-				currentBuzzObject.stop();
-				SongPlayer.currentSong.playing = null;
+				stopSong(song);
 			}
 			currentBuzzObject = new buzz.sound(song.audioUrl, {
 				formats: ['mp3'],
@@ -40,6 +39,16 @@
 		var playSong = function(song){
 			currentBuzzObject.play();
 			song.playing = true;
+		};
+
+		/**
+		 * @function stopSong
+		 * @desc Stops the currentBuzzObject and sets the value of the song's playing property to false
+		 * @param {Object} song
+		 */
+		var stopSong = function(song){
+			currentBuzzObject.stop();
+			song.playing = null;
 		};
 
 		/**
@@ -96,8 +105,25 @@
       currentSongIndex--;
 
 		if (currentSongIndex < 0) {
-			currentBuzzObject.stop();
-			SongPlayer.currentSong.playing = null;
+				stopSong(song);
+		} else {
+          var song = currentAlbum.songs[currentSongIndex];
+          setSong(song);
+          playSong(song);
+      }
+	};
+
+	/**
+	 * @function SongPlayer.next
+	 * @desc Public method. Gets index of the current playing song and adds 1 to find the index of the next song
+	 * @param {Object} song
+	*/
+	SongPlayer.next = function() {
+      var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+      currentSongIndex++;
+
+		if (currentSongIndex > currentAlbum.length) {
+				stopSong(song);
 		} else {
           var song = currentAlbum.songs[currentSongIndex];
           setSong(song);
