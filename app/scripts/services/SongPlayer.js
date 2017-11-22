@@ -34,7 +34,18 @@
 		var playSong = function( song ) {
 			currentBuzzObject.play();
 			song.playing = true;
-		};
+		}
+
+		/**
+		 * @function pauseSong
+		 * @desc pauses song and sets song.playing to false so album.html changes play/pause icon
+		 * @param {Object} song
+		 */
+	   var pauseSong = function(song) {
+	     currentBuzzObject.pause();
+	     song.playing = false;
+	   }
+
 		/**
 		 * @function stopSong
 		 * @desc Stops the currentBuzzObject and sets the value of the song's playing property to false
@@ -79,11 +90,10 @@
 		 * @desc Pauses the currentBuzzObject and sets the value of the song's playing property to false
 		 * @param {Object} song
 		 */
-		SongPlayer.pause = function( song ) {
-			song = song || SongPlayer.currentSong;
-			currentBuzzObject.pause();
-			SongPlayer.currentSong.playing = false;
-		};
+		 SongPlayer.pause = function( song ) {
+				 song = song || SongPlayer.currentSong;
+				 pauseSong( song );
+		 };
 		/**
 		 * @function SongPlayer.previous
 		 * @desc Public method. Gets index of the current playing song and subtracts 1 to find the index of the previous song
@@ -118,5 +128,8 @@
 		};
 		return SongPlayer;
 	}
-	angular.module( 'blocJams' ).factory( 'SongPlayer', [ 'Fixtures', SongPlayer ] );
+
+	angular
+		.module( 'blocJams' )
+		.factory( 'SongPlayer', [ 'Fixtures', SongPlayer ] );
 } )();
