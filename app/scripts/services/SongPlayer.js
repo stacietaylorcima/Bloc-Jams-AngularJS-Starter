@@ -37,22 +37,12 @@
 		}
 
 		/**
-		 * @function pauseSong
-		 * @desc pauses song and sets song.playing to false so album.html changes play/pause icon
-		 * @param {Object} song
-		 */
-	   var pauseSong = function(song) {
-	     currentBuzzObject.pause();
-	     song.playing = false;
-	   }
-
-		/**
 		 * @function stopSong
 		 * @desc Stops the currentBuzzObject and sets the value of the song's playing property to false
 		 * @param {Object} song
 		 */
-		var stopSong = function( song ) {
-			currentBuzzObject.stop();
+		var stopSong = function() {
+			currentBuzzObject.stop( SongPlayer.currentSong );
 			song.playing = null;
 		};
 		/**
@@ -92,8 +82,9 @@
 		 */
 		 SongPlayer.pause = function( song ) {
 				 song = song || SongPlayer.currentSong;
-				 pauseSong( song );
-		 };
+				 currentBuzzObject.pause();
+		 		 SongPlayer.currentSong.playing = false;
+		 		};
 		/**
 		 * @function SongPlayer.previous
 		 * @desc Public method. Gets index of the current playing song and subtracts 1 to find the index of the previous song
