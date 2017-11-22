@@ -42,8 +42,8 @@
 		 * @param {Object} song
 		 */
 		var stopSong = function() {
-			currentBuzzObject.stop( SongPlayer.currentSong );
-			song.playing = null;
+			currentBuzzObject.stop();
+			SongPlayer.currentSong.playing = null;
 		};
 		/**
 		 * @desc function that gets the index of the song
