@@ -20,7 +20,9 @@
 			/** @desc restrict 'E', instructs Angular to treat this directive as an element. For example, Angular will run the code if it finds <seek-bar> in the HTML, but not if it finds <div seek-bar>*/
 			restrict: 'E',
 			/** @desc scope {}, specifies that a new scope will be creaated for this specific directive. An isolate-scope allows us to bind functions from the directive's VIEW to it's SCOPE.*/
-			scope: {},
+			scope: {
+				onChange: '&'
+			},
 			/**
 			 * @function link
 			 * @desc Responsible for registering DOM listeners and updating the DOM. This is where most of the directives logic will live.
@@ -36,6 +38,15 @@
 				scope.max = 100;
 				/** @desc Holds the element that matches the directive (<seek-bar>) as a jQuery object so we can call jQuery methods on it.*/
 				var seekBar = $( element );
+				/** @desc This code observes the value of the 'scope.value' that has been declared in player_bar.html by specifying the attribute name (value) in the 1st argument. When the observed attribute is set or changed, we execute a callback function (2nd argument) that sets a new value (newValue) for the scope.value attribute.*/
+				attributes.$observe('value', function(newValue) {
+			    scope.value = newValue;
+			  });
+				/** @desc This code observes the value of the 'scope.max' that has been declared in player_bar.html by specifying the attribute name (max) in the 1st argument. When the observed attribute is set or changed, we execute a callback function (2nd argument) that sets a new value (newValue) for the scope.max attribute.*/
+			  attributes.$observe('max', function(newValue) {
+			    scope.max = newValue;
+			  });
+
 				/** @desc A function that calculates a percent based on the value and maximum value of a seek bar.*/
 				var percentString = function() {
 					var value = scope.value;
@@ -68,6 +79,7 @@
 				scope.onClickSeekBar = function( event ) {
 					var percent = calculatePercent( seekBar, event );
 					scope.value = percent * scope.max;
+					notifyOnChange(scope.value);
 				};
 				/**
 				 * @function scope.trackThumb
@@ -78,13 +90,21 @@
 						var percent = calculatePercent( seekBar, event );
 						scope.$apply( function() {
 							scope.value = percent * scope.max;
+							notifyOnChange(scope.value);
 						} );
 					} );
+
 					$document.bind( 'mouseup.thumb', function() {
 						$document.unbind( 'mousemove.thumb' );
 						$document.unbind( 'mouseup.thumb' );
 					} );
 				};
+
+				var notifyOnChange = function(newValue) {
+     			if (typeof scope.onChange === 'function') {
+         	scope.onChange({value: newValue});
+     			}
+ 				};
 			}
 		};
 	}
