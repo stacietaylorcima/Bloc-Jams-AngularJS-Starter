@@ -18,7 +18,7 @@
 		 */
 		var setSong = function(song) {
 			if (currentBuzzObject) {
-				stopSong(song);
+				stopSong(SongPlayer.currentSong);
 			}
 			currentBuzzObject = new buzz.sound(song.audioUrl, {
 				formats: ['mp3'],
@@ -47,7 +47,7 @@
 		 */
 		var stopSong = function(song) {
 			currentBuzzObject.stop();
-			song.playing = null;
+			SongPlayer.currentSong.playing = null;
 		};
 		/**
 		 * @desc function that gets the index of the song
