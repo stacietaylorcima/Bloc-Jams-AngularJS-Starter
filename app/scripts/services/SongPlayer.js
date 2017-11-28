@@ -22,11 +22,16 @@
 			}
 			currentBuzzObject = new buzz.sound(song.audioUrl, {
 				formats: ['mp3'],
-				preload: true
+				preload: true,
+				autoplay: true
 			});
 			currentBuzzObject.bind('timeupdate', function() {
 				$rootScope.$apply(function() {
 					SongPlayer.currentTime = currentBuzzObject.getTime();
+					// Auto-play the next song: Check to see if the current time of the playing song is that same as the duration of the song. If it is, automatically play the next song using the SongPlayer.next function.
+					if (SongPlayer.currentTime === currentBuzzObject.getDuration()){
+						SongPlayer.next(song);
+					}
 				});
 			});
 			SongPlayer.currentSong = song;
