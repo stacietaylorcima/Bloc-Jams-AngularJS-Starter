@@ -1,16 +1,19 @@
 (function() {
 	function SongPlayer($rootScope, Fixtures) {
 		var SongPlayer = {};
+
 		/**
 		 * @desc variable that uses the getAlbum() method of the Fixtures service to store the album information
 		 * @type {Object}
 		 */
 		var currentAlbum = Fixtures.getAlbum();
+
 		/**
 		 * @desc Buzz object audio file
 		 * @type {Object}
 		 */
 		var currentBuzzObject = null;
+
 		/**
 		 * @function setSong
 		 * @desc Stops currently playing song and loads new audio file as currentBuzzObject
@@ -36,6 +39,7 @@
 			});
 			SongPlayer.currentSong = song;
 		};
+
 		/**
 		 * @function playSong
 		 * @desc Plays the currentBuzzObject and sets the value of the song's playing property to true
@@ -45,6 +49,7 @@
 			currentBuzzObject.play();
 			song.playing = true;
 		};
+
 		/**
 		 * @function stopSong
 		 * @desc Stops the currentBuzzObject and sets the value of the song's playing property to false
@@ -54,6 +59,7 @@
 			currentBuzzObject.stop();
 			SongPlayer.currentSong.playing = null;
 		};
+
 		/**
 		 * @desc function that gets the index of the song
 		 * @type {Object}
@@ -61,21 +67,25 @@
 		var getSongIndex = function(song) {
 			return currentAlbum.songs.indexOf(song);
 		};
+
 		/**
 		 * @desc Active song object from list of songs is public so that we can access the currentSong from the PlayerBarCtrl
 		 * @type {Object}
 		 */
 		SongPlayer.currentSong = null;
+
 		/**
 		 * @desc Current playback time (in seconds) of currently playing song
 		 * @type {Number}
 		 */
 		SongPlayer.currentTime = null;
+
 		/**
 		 * @desc attribute that holds the value of the volume
 		 * @type {Number}
 		 */
 		SongPlayer.volume = null;
+
 		/**
 		 * @function SongPlayer.play
 		 * @desc Public method.
@@ -94,6 +104,7 @@
 				}
 			}
 		};
+
 		/**
 		 * @function SongPlayer.pause
 		 * @desc Pauses the currentBuzzObject and sets the value of the song's playing property to false
@@ -104,6 +115,7 @@
 			currentBuzzObject.pause();
 			SongPlayer.currentSong.playing = false;
 		};
+
 		/**
 		 * @function SongPlayer.previous
 		 * @desc Public method. Gets index of the current playing song and subtracts 1 to find the index of the previous song
@@ -120,6 +132,7 @@
 				playSong(song);
 			}
 		};
+
 		/**
 		 * @function SongPlayer.next
 		 * @desc Public method. Gets index of the current playing song and adds 1 to find the index of the next song
@@ -136,6 +149,7 @@
 				playSong(song);
 			}
 		};
+
 		/**
 		 * @function SongPlayer.setCurrentTime
 		 * @desc Public method. Checks if there is a current Buzz object, and, if so, uses the Buzz library's setTime method to set the playback position in seconds.
@@ -146,6 +160,7 @@
 				currentBuzzObject.setTime(time);
 			}
 		};
+
 		/**
 		 * @function SongPlayer.setVolume
 		 * @desc Public method. Updates the volume on change using the Buzz library's setVolume method.
@@ -156,6 +171,29 @@
 				currentBuzzObject.setVolume(volume)
 			}
 		};
+
+		/**
+		 * @function SongPlayer.mute
+		 * @desc Public method. Attached to the ion-volume-high icon with an ng-click & ng-show so that when user clicks the icon the volume will mute.
+		 * @param {Object} volume
+		 */
+		SongPlayer.mute = function(volume){
+			if (currentBuzzObject) {
+				currentBuzzObject.toggleMute();
+			}
+		};
+
+		/**
+		* @function SongPlayer.unmute
+		* @desc Public method. Attached to the ion-volume-off icon with an ng-click & ng-show so that when user clicks the icon the volume will unmute.
+		* @param {Object} volume
+		*/
+	  SongPlayer.unmute = function(volume){
+	  	if (currentBuzzObject) {
+				currentBuzzObject.toggleMute();
+			}
+		};
+
 		return SongPlayer;
 	}
 	angular
