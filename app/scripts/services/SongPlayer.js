@@ -188,11 +188,11 @@
 		* @desc Public method. Attached to the ion-volume-off icon with an ng-click & ng-show so that when user clicks the icon the volume will unmute.
 		* @param {Object} volume
 		*/
-	  SongPlayer.unmute = function(volume){
-	  	if (currentBuzzObject) {
-				currentBuzzObject.toggleMute();
-			}
-		};
+	  // SongPlayer.unmute = function(volume){
+	  // 	if (currentBuzzObject) {
+		// 		currentBuzzObject.toggleMute();
+		// 	}
+		// };
 
 		return SongPlayer;
 	}
