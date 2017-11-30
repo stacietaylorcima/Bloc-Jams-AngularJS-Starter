@@ -28,6 +28,7 @@
 				preload: true,
 				autoplay: true
 			});
+			SongPlayer.volume = currentBuzzObject.getVolume();
 			currentBuzzObject.bind('timeupdate', function() {
 				$rootScope.$apply(function() {
 					SongPlayer.currentTime = currentBuzzObject.getTime();
@@ -172,27 +173,16 @@
 			}
 		};
 
-		/**
-		 * @function SongPlayer.mute
-		 * @desc Public method. Attached to the ion-volume-high icon with an ng-click & ng-show so that when user clicks the icon the volume will mute.
-		 * @param {Object} volume
-		 */
-		SongPlayer.mute = function(volume){
-			if (currentBuzzObject) {
-				currentBuzzObject.toggleMute();
-			}
-		};
 
 		/**
-		* @function SongPlayer.unmute
-		* @desc Public method. Attached to the ion-volume-off icon with an ng-click & ng-show so that when user clicks the icon the volume will unmute.
-		* @param {Object} volume
-		*/
-	  // SongPlayer.unmute = function(volume){
-	  // 	if (currentBuzzObject) {
-		// 		currentBuzzObject.toggleMute();
-		// 	}
-		// };
+		 * @function SongPlayer.toggleMute
+		 * @desc Public method.Uses the Buzz Library's toggleMute() method to automatically mute or unmute the sound. Also uses the Buzz Library's isMuted() method onthe `currentBuzzObject` object to return true if the sound is muted and return false otherwise.
+		 * @param SongPlayer.volume?
+		 */
+		SongPlayer.toggleMute = function() {
+			currentBuzzObject.toggleMute();
+			SongPlayer.muted = currentBuzzObject.isMuted();
+		};
 
 		return SongPlayer;
 	}
