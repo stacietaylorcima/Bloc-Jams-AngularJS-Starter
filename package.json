@@ -17,12 +17,8 @@
     "path": "^0.4.9",
     "inert": "^4.2.0"
   },
-  "engines": {
-    "node": ">=6.11.1"
-  },
   "devDependencies": {
-    "connect-modrewrite": "^0.7.9",
-    "es5-shim": "^4.0.1"
+    "connect-modrewrite": "^0.7.9"
   },
   "bugs": {
     "url": "https://github.com/Bloc/Bloc-Jams-AngularJS-Starter/issues"
