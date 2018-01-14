@@ -1,6 +1,6 @@
 # Bloc Jams Music Player
 
-[Bloc Jams Album View](https://i.imgur.com/LTHGkSm.png)
+![Bloc Jams Album View](https://i.imgur.com/LTHGkSm.png)
 
 ## What is it?
 
