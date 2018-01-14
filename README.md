@@ -1,4 +1,6 @@
-# Bloc Jams AngularJS Starter
+# Bloc Jams Music Player
+
+[Bloc Jams Album View](https://i.imgur.com/LTHGkSm.png)
 
 ## What is it?
 
@@ -14,7 +16,7 @@ Bloc Jams is a streaming music player with media queries to determine the viewer
 * _(At this time all entries are duplicates of a single album.)_
 
 **Album Page:**
-* The Album Page includes album data from the Collection page, plus a track list with track number, title, and duration. 
+* The Album Page includes album data from the Collection page, plus a track list with track number, title, and duration.
 * A player control with play/pause, track back, track forward, and sliders for controlling the position of the currently playing track and the volume level appears at the bottom in a semi-transparent overlay.
 * Hovering over a track number causes a play icon to appear in the track number's place and a pause button appears in the same position for the currently playing track.
 * The Buzz audio library is used to load, play, and present representations of meta data for audio files.
